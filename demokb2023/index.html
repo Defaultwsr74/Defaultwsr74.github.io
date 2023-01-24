@@ -9,8 +9,8 @@
 NET1-Open { </br>
 •	Ip address = 192.168.130.70/24, DefaultGateway=192.168.130.1 </br>
 •	Install: </br>
-	Центр Управления Сетью – Сервер </br>
-	SqlExpress (Named instance = VIPNET </br>
+•	Центр Управления Сетью – Сервер </br>
+•	SqlExpress (Named instance = VIPNET </br>
 SQL Server Browser = Automatic </br>
 FILESTREAM = Ставим везде галочки/Server Configuration = Mixed Mode) </br>
 •	SQL Server Configuration Manager – SQL Server Network – Enable Named pipes, Enable TCP/IP – TCP/IP (IP1-4 Enabled=yes) </br>
@@ -19,9 +19,9 @@ FILESTREAM = Ставим везде галочки/Server Configuration = Mixed
 NET1-AdminCA { </br>
 •	Ip address = 192.168.130.2/24, DefaultGateway=192.168.130.1 </br>
 •	Install: </br>
-	Центр Управления Сетью – Клиент </br>
-	Центр Управления Сетью – Сервер – Проверка подлинности SQL Server – Имя сервера 192.168.130.70\vipnet – имя пользователя sa – пароль xxXX1234 (Если нет подключения, то на NET1-Open в SQL Manager надо перезапустить сервис SQL Server VPN...) </br>
-	VIPNet Administrator – Комплект пользователя – Удостоверяющий и ключевой центр  </br>
+• Центр Управления Сетью – Клиент </br>
+•	Центр Управления Сетью – Сервер – Проверка подлинности SQL Server – Имя сервера 192.168.130.70\vipnet – имя пользователя sa – пароль xxXX1234 (Если нет подключения, то на NET1-Open в SQL Manager надо перезапустить сервис SQL Server VPN...) </br>
+•	VIPNet Administrator – Комплект пользователя – Удостоверяющий и ключевой центр  </br>
 – SQL server 192.168.130.70\vipnet  </br>
 – имя sa, пароль xxXX1234 – имя администратора NET1-Adm  </br>
 – срок действия сертификата с текущего момента  </br>
@@ -45,6 +45,7 @@ NET1-AdminCA { </br>
 10.	Пользователю NET2-Ivanov добавить связь c NET2-Coord, NET2-User </br>
 11.	Пользователю NET2-User добавить связь c NET2-Coord </br>
 12.	Создать справочники и ключи </br>
+13.	После входа в клиентов отправить справочники и ключи </br>
 В УКЦ: </br>
 1.	Задать пароль администратора сетевым узлам (ххХХ1234) </br>
 2.	Выдать новый дистрибутив ключей сетевым узлам </br>
@@ -79,26 +80,37 @@ Login and password= user </br>
 NET2-Client { </br>
 •	Ip address = 172.16.10.2/24, DefaultGateway=172.16.10.1 </br>
 •	Install: </br>
-	VIPNet Client </br>
+•	VIPNet Client </br>
 } </br>
  </br>
 NET1-OperCA { </br>
 •	Ip address = 192.168.130.3/24, DefaultGateway=192.168.130.1 </br>
 •	Install: </br>
-	VIPNet Client </br>
-	Publication Service (установить ключи сейчас = нет) </br>
+•	VIPNet Client </br>
+•	Publication Service (установить ключи сейчас = нет) </br>
+Входим в клиента и Registration Point и после входа задаст вопрос установки ключей сети, выбираем Registration Point </br>
 } </br>
  </br>
 NET2-Coord { </br>
 •	Ip address = (ethernet0 = 26.192.100.2/24, DefaultGateway = 26.192.100.1), (ethernet1 = 172.16.10.1/24) </br>
 •	Install:  </br>
-	VIPNet Coordinator </br>
-	Registration Point </br>
+•	VIPNet Coordinator </br>
+•	Registration Point </br>
 } </br>
  </br>
 NET3-Admin { </br>
 •	Ip address =  </br>
 •	Install: </br>
-	Центр управления сетью сервер (создать сервер базы данных) </br>
+•	Центр управления сетью сервер (создать сервер базы данных) </br>
+•	Центр управления сетью клиент </br>
+•	Удостоверяющий и ключевой центр </br>
+•	VIPNet Client</br>
 } </br>
+</br>
+NET2-Client {</br>
+•	Install:</br>
+•	VIPNet Client</br>
+Установить ключи NET2-Ivanov и NET2-User</br>
+}</br>
+
 
