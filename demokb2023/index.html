@@ -1,73 +1,103 @@
-All Windows Server – </br>
-•	Отключить конфигурацию усиленной безопасности Internet Explorer</br>
-•	Полностью отключить брандмауэр </br>
-На устройствах, где установлен клиент, нужно вынести на рабочий стол деловую почту и VIPNet Client</br>
-При первом входе в ЦУС логин и пароль Administrator</br>
-Все последующие пароли ставим xxXX1234</br>
-На машинах с ОС Linux логин и пароль user</br>
-</br>
-NET1-Open {</br>
-•	Ip address = 192.168.130.70/24, DefaultGateway=192.168.130.1</br>
-•	Install:</br>
-	Центр Управления Сетью – Сервер</br>
-	SqlExpress (Named instance = VIPNET</br>
-SQL Server Browser = Automatic</br>
-FILESTREAM = Ставим везде галочки/Server Configuration = Mixed Mode)</br>
-•	SQL Server Configuration Manager – SQL Server Network – Enable Named pipes, Enable TCP/IP – TCP/IP (IP1-4 Enabled=yes)</br>
-}</br>
-</br>
-NET1-AdminCA {</br>
-•	Ip address = 192.168.130.2/24, DefaultGateway=192.168.130.1</br>
-•	Install:</br>
-	Центр Управления Сетью – Клиент</br>
-	Центр Управления Сетью – Сервер – Проверка подлинности SQL Server – Имя сервера 192.168.130.70\vipnet – имя пользователя sa – пароль xxXX1234 (Если нет подключения, то на NET1-Open в SQL Manager надо перезапустить сервис SQL Server VPN...)</br>
-	VIPNet Administrator – Комплект пользователя – Удостоверяющий и ключевой центр </br>
-– SQL server 192.168.130.70\vipnet </br>
-– имя sa, пароль xxXX1234 – имя администратора NET1-Adm </br>
-– срок действия сертификата с текущего момента </br>
-– программные средства галочку на функционировать в режиме аккредитованного…, потом настроить, во всех вкладках Cert 1 Cert 2</br>
-- автоматический режим работы, галочки в (создавать ключи узлов: при получении, удовлетворять запросы на сертификаты из центров регистрации, передавать все CRL в цус: после изменения) </br>
-- собственный пароль</br>
-	VIPNet CA informing</br>
-	Веб сервер IIS – FTP сервер (галочки на расширяемость FTP, служба FTP)</br>
-В ЦУСЕ:</br>
-Настроить структуру защищенной сети самостоятельно</br>
-}</br>
-</br>
-NET2-Client {</br>
-•	Ip address = 172.16.10.2/24, DefaultGateway=172.16.10.1</br>
-•	Install:</br>
-	VIPNet Client</br>
-}</br>
-NET1-OperCA {</br>
-•	Ip address = 192.168.130.3/24, DefaultGateway=192.168.130.1</br>
-•	Install:</br>
-	VIPNet Client</br>
-	Publication Service (установить ключи сейчас = нет)</br>
-}</br>
-</br>
-NET2-Coord {</br>
-•	Ip address = (ethernet0 = 26.192.100.2/24, DefaultGateway = 26.192.100.1), (ethernet1 = 172.16.10.1/24)</br>
+ All Windows Server –  </br>
+•	Отключить конфигурацию усиленной безопасности Internet Explorer </br>
+•	Полностью отключить брандмауэр  </br>
+На устройствах, где установлен клиент, нужно вынести на рабочий стол деловую почту и VIPNet Client </br>
+При первом входе в ЦУС логин и пароль Administrator </br>
+Все последующие пароли ставим xxXX1234 </br>
+На машинах с ОС Linux логин и пароль user </br>
+ </br>
+NET1-Open { </br>
+•	Ip address = 192.168.130.70/24, DefaultGateway=192.168.130.1 </br>
 •	Install: </br>
-	VIPNet Coordinator</br>
-}</br>
-</br>
-NET3-Admin {</br>
-•	Ip address = </br>
-•	Install:</br>
-	Центр управления сеть сервер</br>
-}</br>
-Footer
-© 2023 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
+	Центр Управления Сетью – Сервер </br>
+	SqlExpress (Named instance = VIPNET </br>
+SQL Server Browser = Automatic </br>
+FILESTREAM = Ставим везде галочки/Server Configuration = Mixed Mode) </br>
+•	SQL Server Configuration Manager – SQL Server Network – Enable Named pipes, Enable TCP/IP – TCP/IP (IP1-4 Enabled=yes) </br>
+} </br>
+ </br>
+NET1-AdminCA { </br>
+•	Ip address = 192.168.130.2/24, DefaultGateway=192.168.130.1 </br>
+•	Install: </br>
+	Центр Управления Сетью – Клиент </br>
+	Центр Управления Сетью – Сервер – Проверка подлинности SQL Server – Имя сервера 192.168.130.70\vipnet – имя пользователя sa – пароль xxXX1234 (Если нет подключения, то на NET1-Open в SQL Manager надо перезапустить сервис SQL Server VPN...) </br>
+	VIPNet Administrator – Комплект пользователя – Удостоверяющий и ключевой центр  </br>
+– SQL server 192.168.130.70\vipnet  </br>
+– имя sa, пароль xxXX1234 – имя администратора NET1-Adm  </br>
+– срок действия сертификата с текущего момента  </br>
+– программные средства галочку на функционировать в режиме аккредитованного…, потом настроить, во всех вкладках Cert 1 Cert 2 </br>
+- автоматический режим работы, галочки в (создавать ключи узлов: при получении, удовлетворять запросы на сертификаты из центров регистрации, передавать все CRL в цус: после изменения)  </br>
+- собственный пароль </br>
+	VIPNet CA informing </br>
+	Веб сервер IIS – FTP сервер (галочки на расширяемость FTP, служба FTP) </br>
+В ЦУСЕ: </br>
+Настроить структуру защищенной сети самостоятельно </br>
+Создать в ЦУСе: </br>
+1.	NET1-Coord [Координаторы] {роли узла - удалить VPN, поставить HW-VA; адреса во внешних сетях: 26.191.100.2,192.168.130.1} </br>
+2.	NET2-Coord [Координаторы] {адреса во внешних сетях: 26.191.100.2,172.16.10.1; туннелирование – макс число одновременно… 15; туннелирование: диапазон 192.168.130.65-192.168.130.75; межсерверные каналы: NET2-Coord} </br>
+3.	NET1-Adm(NET1-Coord) [Клиенты] {адреса во внешних сетях: 192.168.130.2} </br>
+4.	NET1-UserCA(NET1-Coord) [Клиенты] {роли узла – Registration Point; адреса во внешних сетях: 192.168.130.3} (Связи с узлами: NET2-User) </br>
+5.	NET2-User(NET2-Coord) [Клиенты] {адреса во внешних сетях: 172.16.10.2} </br>
+6.	NET2-Ivanov(NET2-User) [Клиенты] </br>
+7.	Пользователю NET1-Adm добавить связь со всеми возможными пользователями, кроме NET2-Coord </br>
+8.	Пользователю NET1-Coord добавить связь c NET1-UserCA, NET2-Coord </br>
+9.	Пользователю NET1-UserCA добавить связь c NET2-Ivanov, NET2-User </br>
+10.	Пользователю NET2-Ivanov добавить связь c NET2-Coord, NET2-User </br>
+11.	Пользователю NET2-User добавить связь c NET2-Coord </br>
+12.	Создать справочники и ключи </br>
+В УКЦ: </br>
+1.	Задать пароль администратора сетевым узлам (ххХХ1234) </br>
+2.	Выдать новый дистрибутив ключей сетевым узлам </br>
+3.	Создать папки на рабочем столе mez и rez </br>
+4.	Пользователям User и Ivanov: пароль – создать ключи электронной подписи </br>
+5.	После справочников, сетевым узлам создать и передать ключи в ЦУС </br>
+6.	Выдать новый дистрибутив ключей узлу NET2-User </br>
+7.	Перенести папку Dst for network в корень флэш-накопителя </br>
+8.	Перезагрузить машину и перейти на NET1-CoordCA </br>
+
+} </br>
+NET1-CoordCA { </br>
+Login and password= user </br>
+1.	Full-screen interface </br>
+2.	Europe – Russia – Region </br>
+3.	Load keys from USB </br>
+4.	NET1-Coord </br>
+5.	UP </br>
+6.	Static eth0 26.191.100.2 </br>
+7.	UP </br>
+8.	Static eth1 192.168.130.1 </br>
+9.	Down </br>
+10.	Gateway 26.191.199.1
+11.	OFF
+12.	Hostname NET1-Coord </br>
+13.	No </br>
+14.	No External Firewall </br>
+15.	На NET1-AdminCa войти в клиент ЦУС и УКЦ </br>
+16.	Net1-Adm </br>
+17.	 </br>
+} </br>
+NET2-Client { </br>
+•	Ip address = 172.16.10.2/24, DefaultGateway=172.16.10.1 </br>
+•	Install: </br>
+	VIPNet Client </br>
+} </br>
+ </br>
+NET1-OperCA { </br>
+•	Ip address = 192.168.130.3/24, DefaultGateway=192.168.130.1 </br>
+•	Install: </br>
+	VIPNet Client </br>
+	Publication Service (установить ключи сейчас = нет) </br>
+} </br>
+ </br>
+NET2-Coord { </br>
+•	Ip address = (ethernet0 = 26.192.100.2/24, DefaultGateway = 26.192.100.1), (ethernet1 = 172.16.10.1/24) </br>
+•	Install:  </br>
+	VIPNet Coordinator </br>
+} </br>
+ </br>
+NET3-Admin { </br>
+•	Ip address =  </br>
+•	Install: </br>
+	Центр управления сетью сервер (создать сервер базы данных) </br>
+} </br>
+
