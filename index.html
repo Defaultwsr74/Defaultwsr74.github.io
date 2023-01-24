@@ -1,60 +1,60 @@
- All Windows Server – 
-•	Отключить конфигурацию усиленной безопасности Internet Explorer
-•	Полностью отключить брандмауэр 
-На устройствах, где установлен клиент, нужно вынести на рабочий стол деловую почту и VIPNet Client
-При первом входе в ЦУС логин и пароль Administrator
-Все последующие пароли ставим xxXX1234
-На машинах с ОС Linux логин и пароль user
-
-NET1-Open {
-•	Ip address = 192.168.130.70/24, DefaultGateway=192.168.130.1
-•	Install:
-	Центр Управления Сетью – Сервер
-	SqlExpress (Named instance = VIPNET
-SQL Server Browser = Automatic
-FILESTREAM = Ставим везде галочки/Server Configuration = Mixed Mode)
-•	SQL Server Configuration Manager – SQL Server Network – Enable Named pipes, Enable TCP/IP – TCP/IP (IP1-4 Enabled=yes)
-}
-
-NET1-AdminCA {
-•	Ip address = 192.168.130.2/24, DefaultGateway=192.168.130.1
-•	Install:
-	Центр Управления Сетью – Клиент
-	Центр Управления Сетью – Сервер – Проверка подлинности SQL Server – Имя сервера 192.168.130.70\vipnet – имя пользователя sa – пароль xxXX1234 (Если нет подключения, то на NET1-Open в SQL Manager надо перезапустить сервис SQL Server VPN...)
-	VIPNet Administrator – Комплект пользователя – Удостоверяющий и ключевой центр 
-– SQL server 192.168.130.70\vipnet 
-– имя sa, пароль xxXX1234 – имя администратора NET1-Adm 
-– срок действия сертификата с текущего момента 
-– программные средства галочку на функционировать в режиме аккредитованного…, потом настроить, во всех вкладках Cert 1 Cert 2
-- автоматический режим работы, галочки в (создавать ключи узлов: при получении, удовлетворять запросы на сертификаты из центров регистрации, передавать все CRL в цус: после изменения) 
-- собственный пароль
-	VIPNet CA informing
-	Веб сервер IIS – FTP сервер (галочки на расширяемость FTP, служба FTP)
-В ЦУСЕ:
-Настроить структуру защищенной сети самостоятельно
-}
-
-NET2-Client {
-•	Ip address = 172.16.10.2/24, DefaultGateway=172.16.10.1
-•	Install:
-	VIPNet Client
-}
-NET1-OperCA {
-•	Ip address = 192.168.130.3/24, DefaultGateway=192.168.130.1
-•	Install:
-	VIPNet Client
-	Publication Service (установить ключи сейчас = нет)
-}
-
-NET2-Coord {
-•	Ip address = (ethernet0 = 26.192.100.2/24, DefaultGateway = 26.192.100.1), (ethernet1 = 172.16.10.1/24)
-•	Install: 
-	VIPNet Coordinator
-}
-
-NET3-Admin {
-•	Ip address = 
-•	Install:
-	Центр управления сеть сервер
-}
+ All Windows Server – </br>
+•	Отключить конфигурацию усиленной безопасности Internet Explorer</br>
+•	Полностью отключить брандмауэр </br>
+На устройствах, где установлен клиент, нужно вынести на рабочий стол деловую почту и VIPNet Client</br>
+При первом входе в ЦУС логин и пароль Administrator</br>
+Все последующие пароли ставим xxXX1234</br>
+На машинах с ОС Linux логин и пароль user</br>
+</br>
+NET1-Open {</br>
+•	Ip address = 192.168.130.70/24, DefaultGateway=192.168.130.1</br>
+•	Install:</br>
+	Центр Управления Сетью – Сервер</br>
+	SqlExpress (Named instance = VIPNET</br>
+SQL Server Browser = Automatic</br>
+FILESTREAM = Ставим везде галочки/Server Configuration = Mixed Mode)</br>
+•	SQL Server Configuration Manager – SQL Server Network – Enable Named pipes, Enable TCP/IP – TCP/IP (IP1-4 Enabled=yes)</br>
+}</br>
+</br>
+NET1-AdminCA {</br>
+•	Ip address = 192.168.130.2/24, DefaultGateway=192.168.130.1</br>
+•	Install:</br>
+	Центр Управления Сетью – Клиент</br>
+	Центр Управления Сетью – Сервер – Проверка подлинности SQL Server – Имя сервера 192.168.130.70\vipnet – имя пользователя sa – пароль xxXX1234 (Если нет подключения, то на NET1-Open в SQL Manager надо перезапустить сервис SQL Server VPN...)</br>
+	VIPNet Administrator – Комплект пользователя – Удостоверяющий и ключевой центр </br>
+– SQL server 192.168.130.70\vipnet </br>
+– имя sa, пароль xxXX1234 – имя администратора NET1-Adm </br>
+– срок действия сертификата с текущего момента </br>
+– программные средства галочку на функционировать в режиме аккредитованного…, потом настроить, во всех вкладках Cert 1 Cert 2</br>
+- автоматический режим работы, галочки в (создавать ключи узлов: при получении, удовлетворять запросы на сертификаты из центров регистрации, передавать все CRL в цус: после изменения) </br>
+- собственный пароль</br>
+	VIPNet CA informing</br>
+	Веб сервер IIS – FTP сервер (галочки на расширяемость FTP, служба FTP)</br>
+В ЦУСЕ:</br>
+Настроить структуру защищенной сети самостоятельно</br>
+}</br>
+</br>
+NET2-Client {</br>
+•	Ip address = 172.16.10.2/24, DefaultGateway=172.16.10.1</br>
+•	Install:</br>
+	VIPNet Client</br>
+}</br>
+NET1-OperCA {</br>
+•	Ip address = 192.168.130.3/24, DefaultGateway=192.168.130.1</br>
+•	Install:</br>
+	VIPNet Client</br>
+	Publication Service (установить ключи сейчас = нет)</br>
+}</br>
+</br>
+NET2-Coord {</br>
+•	Ip address = (ethernet0 = 26.192.100.2/24, DefaultGateway = 26.192.100.1), (ethernet1 = 172.16.10.1/24)</br>
+•	Install: </br>
+	VIPNet Coordinator</br>
+}</br>
+</br>
+NET3-Admin {</br>
+•	Ip address = </br>
+•	Install:</br>
+	Центр управления сеть сервер</br>
+}</br>
 
